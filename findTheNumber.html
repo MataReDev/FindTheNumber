@@ -27,7 +27,8 @@
         <div class="form-group">
             <input type="text" class="form-control" id="userGuess">
         </div>
-        <button class="btn btn-primary" onclick="checkGuess()">Submit Guess</button>
+        <button class="btn btn-primary mr-2" onclick="checkGuess()">Submit Guess</button>
+        <button class="btn btn-secondary" onclick="restartGame()">Restart Game</button>
         <p class="mt-3" id="result"></p>
     </div>
 
@@ -37,11 +38,15 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
     <script>
-        // Générer un nombre aléatoire entre 1 et 100
-        const randomNumber = Math.floor(Math.random() * 100) + 1;
-        console.log(randomNumber);
+        let randomNumber, attempts;
 
-        let attempts = 0;
+        function startGame() {
+            // Générer un nombre aléatoire entre 1 et 100
+            randomNumber = Math.floor(Math.random() * 100) + 1;
+            console.log(randomNumber);
+            attempts = 0;
+            document.getElementById('result').textContent = '';
+        }
 
         function checkGuess() {
             const userGuess = parseInt(document.getElementById('userGuess').value);
@@ -67,6 +72,14 @@
                 }
             }
         }
+
+        function restartGame() {
+            document.getElementById('userGuess').value = '';
+            startGame();
+        }
+
+        // Au chargement de la page, démarrer une nouvelle partie
+        window.onload = startGame;
     </script>
 </body>
 </html>
