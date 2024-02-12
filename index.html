@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guess the Number</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        #result {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Guess the Number Game</h1>
+    <p>Guess a number between 1 and 100:</p>
+    <input type="text" id="userGuess">
+    <button onclick="checkGuess()">Submit Guess</button>
+    <p id="result"></p>
+
+    <script>
+        // Générer un nombre aléatoire entre 1 et 100
+        const randomNumber = Math.floor(Math.random() * 100) + 1;
+        console.log(randomNumber);
+
+        let attempts = 0;
+
+        function checkGuess() {
+            const userGuess = parseInt(document.getElementById('userGuess').value);
+            const result = document.getElementById('result');
+
+            if (isNaN(userGuess) || userGuess < 1 || userGuess > 100) {
+                result.textContent = 'Please enter a valid number between 1 and 100.';
+            } else {
+                attempts++;
+
+                if (userGuess === randomNumber) {
+                    result.textContent = `Congratulations! You guessed the number ${randomNumber} correctly in ${attempts} attempts.`;
+                } else if (userGuess < randomNumber) {
+                    result.textContent = 'Too low! Try again.';
+                } else {
+                    result.textContent = 'Too high! Try again.';
+                }
+            }
+        }
+    </script>
+</body>
+</html>
